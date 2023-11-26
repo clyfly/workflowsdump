@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     permissions: write-all
-    runs-on: buildjet-8vcpu-ubuntu-2204
+    runs-on: buildjet-4vcpu-ubuntu-2204
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
