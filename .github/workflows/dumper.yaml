@@ -1,0 +1,25 @@
+name: DeltaDumpers
+
+on:
+  workflow_dispatch:
+    inputs:
+      ROM_URL:
+        description: 'URL for the ROM you need to dump'
+        required: true
+
+jobs:
+  build:
+    permissions: write-all
+    runs-on: buildjet-8vcpu-ubuntu-2204
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      TG_TOKEN: ${{ secrets.TG_TOKEN }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Dump ROM and use tokens
+        run: |
+          bash setup.sh && bash dumpyara.sh ${{ github.event.inputs.ROM_URL }} $GITHUB_TOKEN $TG_TOKEN
